@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block css %}
+      
+  <link rel="stylesheet" href="{% static 'cust/css/bootstrap.css' %}" />
+  <link rel="stylesheet" href="{% static 'cust/css/style.css' %}" />
+  {% endblock css %}
+    <title>{% block title %}
+      Document
+    {% endblock title %}</title>
+  </head>
+  <body>
+    <header>
+      <nav class="top bg-theme">
+        <a
+          class="mx-3 mt-3 text-light"
+          data-bs-toggle="offcanvas"
+          href="#offcanvasExample"
+          role="button"
+          aria-controls="offcanvasExample">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-layout-sidebar-inset" viewBox="0 0 16 16">
+            <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+            <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+          </svg>
+        </a>
+
+        <ul class="nav p-2">
+         
+          <li class="nav-item nav-hover">
+            <a class="nav-link  text-light " href="{% url 'userlogout' %}">Logout</a>
+          </li>
+          <li class="nav-item  ">
+            
+            <a href="{% url 'editprofile' %}"><img src="{{request.user.userprofile.profile_pic.url}}" style="width: 40px;height: 40px; border-radius: 50%;" class="mx-3" alt="" >
+           
+            </a>
+          </li>
+        </ul>  
+      </nav>
+    </header>
+
+    <div
+      class="offcanvas bg-panel offcanvas-start"
+      tabindex="-1"
+      id="offcanvasExample"
+      aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-light" id="offcanvasExampleLabel">Company</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="leftbar">
+        <ul>
+          <ul>
+            {% if request.user.is_superuser == True %}
+            <li class="{{active1}}">
+             <a href="{% url  'admindisplay'%}">Home</a>
+           </li>
+           <li class="{{active2}}">
+             <a href="{% url  'allusers'%}">Users</a>
+           </li>
+           <li class="{{active2}}">
+             <a href="{% url  'allforms'%}">Forms</a>
+           </li>
+            {% endif %}
+             <li class="{{active3}}">
+               <a href="{% url  'profile'%}">Profile</a>
+             </li>
+             <li><a href="{% url  'setting'%}">More</a></li>
+             <li><a href="{% url  'userfdform'%}">Funds</a></li>
+           </ul>
+        </ul>
+      </div>
+    </div>
+
+    <!-- body part -->
+
+    <div class="content">
+      <div class="content1 bg-panel">
+        <div class="leftbar">
+          <ul>
+           {% if request.user.is_superuser == True %}
+           <li class="{{active1}}">
+            <a href="{% url  'admindisplay'%}">Home</a>
+          </li>
+          <li class="{{active2}}">
+            <a href="{% url  'allusers'%}">Users</a>
+          </li>
+          <li class="{{active2}}">
+            <a href="{% url  'allforms'%}">Forms</a>
+          </li>
+           {% endif %}
+            <li class="{{active3}}">
+              <a href="{% url  'profile'%}">Profile</a>
+            </li>
+            <li><a href="{% url  'setting'%}">More</a></li>
+            <li><a href="{% url  'userfdform'%}">Funds</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content2">
+        
+
+{% block content %} 
+  
+{% endblock content %}
+
+      </div>
+    </div>
+
+    <script src="{% static 'cust/js/bootstrap.js' %}"></script>
+    <script src="{% static 'cust/js/popper.js' %}"></script>
+    <script src="{% static 'cust/js/jquery.js' %}"></script>
+  </body>
+</html>

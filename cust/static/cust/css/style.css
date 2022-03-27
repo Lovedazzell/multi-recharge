@@ -1,0 +1,248 @@
+*{
+    margin: 0;
+    padding:0;
+}
+
+.top{
+    display:flex;
+    justify-content :space-between;
+}
+
+.bg-theme{
+    background:linear-gradient(to right,rgba(0, 59, 148, 0.726),rgba(0, 59, 148, 0.726),aqua) ;
+}
+.bg-panel{
+    background:linear-gradient(to bottom,rgba(0, 59, 148, 0.726),aqua) ;
+}
+.bg-btn{
+    background-color: rgba(0, 59, 148, 0.726);
+}
+.al-btn{
+    background-color: aqua;
+}
+
+.color{
+    color: rgba(0, 59, 148, 0.726);
+}
+
+.nav-hover:hover{
+outline: 1px solid aqua;
+}
+
+
+/* --------------leftbar-------------- */
+
+.leftbar{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.leftbar ul li{
+ list-style-type: none;
+border-right: 5px solid rgba(0, 59, 148, 0.726);
+ margin-top: 10px;
+ padding: 10px 60px;
+ transition: 0.9s;
+}
+
+.leftbar ul li:hover{
+background-color: rgba(0, 59, 148, 0.726);
+overflow: hidden;
+
+}
+
+.leftbar ul li:hover a{
+
+    color: rgb(255, 255, 255);
+}
+.leftbar ul li a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color:rgb(255, 255, 255);
+    
+}
+.active{
+    background-color: rgba(0, 59, 148, 0.726);
+    color: black;
+}
+/* --------------------sidebar------------- */
+
+
+
+.content{
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+}
+
+
+@media only screen and (max-width:900px){
+    .content1{
+        display: none;
+    }
+    .content{
+        display: block;
+    }
+}
+
+/* --------------customer profile------------- */
+.grid-box{
+display: grid;
+grid-template-columns: 1fr  ;
+justify-items: center;
+row-gap: 10px;
+}
+
+
+.fd-card:hover{
+   box-shadow: 2px 2px 10px aqua;
+   border: none;
+}
+
+@media only screen and (min-width:650px){
+    .grid-box{
+    row-gap: 15px;
+        grid-template-columns: 1fr 1fr  ;
+    }
+    .grid-3{
+       
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+
+@media only screen and (min-width:1250px){
+    .grid-box{
+    
+       grid-template-columns: 1fr 1fr 1fr;
+    }
+    .grid-3{
+       
+        grid-column-start: 3;
+        grid-column-end: 4;
+        
+    }
+}
+
+
+/* ----------------admin panel------------ */
+
+.admin-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    height: auto;
+}
+.admin-1{
+    /* background-color: rgba(255, 66, 66, 0.527); */
+    border-radius: 15px;
+    padding: 30px 0;
+    text-align: center;
+    
+}
+
+.admin-box div h1{
+    color: rgb(54, 54, 54) ;
+}
+
+.admin-2{
+    /* background-color: rgba(107, 255, 198, 0.521); */
+    border-radius: 15px;
+    text-align: center;
+    padding: 30px 0;
+}
+.admin-3{
+    border-radius: 15px;
+    padding: 30px 0;
+    /* background-color: rgba(9, 255, 0, 0.486); */
+    text-align: center;
+}
+.admin-4{
+    border-radius: 15px;
+    padding: 30px 0;
+    text-align: center;
+    /* background-color: rgba(255, 0, 140, 0.507); */
+}
+
+
+/* ----------------------edit profile------------- */
+
+.edit-grid{
+    display: grid;
+    grid-template-columns:1fr;
+}
+
+.edit-form{
+
+border: none;
+outline: none;
+padding: 5px ;
+max-width: 300px;
+width: 100%;
+}
+
+@media only screen and (min-width:700px){
+    .edit-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+
+/* ----------------------contact us ------------- */
+
+.contact-form{
+max-width: 800px;
+border: none;
+outline:none;
+width: 100%;
+}
+
+.contact-form:focus{
+border-bottom: 2px solid rgb(197, 197, 197);
+}
+
+/* ----------------------aboutus------------- */
+.about-img {
+max-width: 700px;
+width: 100%;
+
+}
+
+/* ----------------------login form------------- */
+.l-container{
+    height:100vh;
+    background:linear-gradient(to bottom,rgba(0, 59, 148, 0.726),aqua) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.l-form{
+background-color: white;
+border-radius: 10px;
+border-right: 10px solid rgba(0, 59, 148, 0.726);
+padding: 15px;
+}
+
+.l-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ----------------------fd-data to user------------- */
+
+.fd-box{
+    height: 10rem;
+    position: relative;
+    padding: 1rem;
+    border-radius: 30px;
+    box-shadow: 2px 2px 5px rgb(209, 209, 209);
+}
+.amount{
+    font-weight: 500;
+    font-family:'Times New Roman', Times, serif ;
+}

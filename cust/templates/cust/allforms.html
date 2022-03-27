@@ -1,0 +1,41 @@
+{% extends "cust/base.html" %}
+
+{% block content %}
+<div class=" overflow-auto ">
+  <table   class="table  overflow-scroll table-info table-striped  ">
+      <thead>
+        <tr>
+        
+          <th scope="col">NAME</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">ADDRESS</th>
+          <th scope="col">MOBILE</th>
+          <th scope="col">AMOUNT</th>
+          <th scope="col">ORDER_ID</th>
+          
+          <th scope="col">DURATION</th>
+          <th scope="col">P-STATUS</th>
+          <th scope="col">DATE_CREATED</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for field in form  %}
+        <tr>
+          
+          <th >{{field.fd_owner}}</th>
+          <td>{{field.email}}</td>
+          <td>{{field.address}}</td>
+          <td>{{field.mobile}}</td>
+          <td>{{field.amount}}</td>
+          <td>{{field.order_id}}</td>
+         
+          <td>{{field.duration}}</td>
+          <td>{{field.payment_status}}</td>
+          <td>{{field.date_created}}</td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+</div>
+{% endblock content %}

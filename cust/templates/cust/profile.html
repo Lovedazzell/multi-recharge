@@ -1,0 +1,45 @@
+
+{% extends "cust/base.html" %}
+{% load static %}
+{% block content %}
+<h1 class="m-4">Save Your Future With Fd Funds</h1>
+<p class="m-4 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quibusdam eum quos eius. Delectus minus ipsum temporibus voluptatum. Aliquid ducimus impedit tempora et corporis maxime modi fugit amet earum quae!</p>
+
+
+<div class="bg-light m">
+  <img src="{% static 'cust/images/fd1.jpg' %}" class="img-fluid my-4  " alt="...">
+</div>
+
+<p class="mx-5 text-muted" >NOTE : For the long time you invest your money .The higher returnes you will get.</p>
+<div class="grid-box m-4">
+    <div class="grid-1">
+       <a href="{% url 'applyFd' 1 %}" class="text-decoration-none">
+        <div class="card border-info border fd-card" style="width: 18rem;">
+          <h1 class="text-black  card-img-top text-center" >Invest For One Year</h1>
+          <div class="card-body">
+            <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+       </a>
+        </div>
+    <div class="grid-2">
+        <a href="{% url 'applyFd' 2 %}" class="text-decoration-none">
+          <div class="  card  border-info border fd-card" style="width: 18rem;">
+            <h1 class="text-black card-img-top text-center" > Invest For Two Years</h1>
+            <div class="card-body">
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </a></div>
+    <div class="grid-3">
+        <a href="{% url 'applyFd' 3 %}"  class="text-decoration-none">
+          <div class="card  border-info border fd-card " style="width: 18rem;">
+            <h1 class="text-black card-img-top text-center" >Invest For Long Time</h1>
+            <div class="card-body">
+              <p class="card-text text-muted">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </a></div>
+</div>
+
+{% endblock content %}

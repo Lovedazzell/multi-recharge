@@ -1,0 +1,27 @@
+{% extends "cust/base.html" %}
+{% load static %}
+{% block content %}
+  {% for field in data %}
+    
+    <div class="d-flex justify-content-between fd-box m-4">
+    <div> <h4 class="text-muted px-4 ">{{field.fd_owner}}</h4>
+        <p  class="text-secondary px-4" >{{field.email}}</p>
+         {% if field.payment_status %}<p  class="text-success px-4" >
+          payment_status : Done</p>
+          {% else %}
+          <p  class="text-danger px-4" >
+          payment_status : Failed </p>
+        {% endif %}
+ </div>   
+    <div>
+        
+        <p  class=" text-secondary px-4" >{{field.duration}}</p>
+    </div>
+   <div> <p  class="text-secondary " >Register date : {{field.date_created|date:"DATE_FORMAT"}}</p>
+         <p class="amount">Amount : {{field.amount}}</p>
+         <p class="amount">Estimate return amount : </p>
+    </div></div>
+
+    
+  {% endfor %}
+{% endblock content %}

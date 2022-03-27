@@ -1,0 +1,43 @@
+{% extends "cust/base.html" %}
+{% load static %}
+{% block content %}
+  
+
+
+<div class="edit-grid m-5">
+       
+  <img src="{{request.user.userprofile.profile_pic.url}}" class="profile-img w-50 img-thumbnail rounded " alt="...">
+  <div >
+   <h1 class="text-info" >{{request.user.username}}</h1>
+   <p>{{request.user.userprofile.status}} </p>
+  </div>
+  
+</div>
+<div class="m-5">
+  <form action="" method="POST" enctype="multipart/form-data">
+  {% for field in  form %} {%csrf_token %}
+  <div class="mb-3 row">
+    <div class="col-2 col-form-label"> {{field.label_tag}}</div>
+    <div class="col-10">
+     {{field}}
+     {{field.errors}}
+    </div>
+  </div>
+  {% endfor %}
+  {% for field in  form1 %} {%csrf_token %}
+  <div class="mb-3 row">
+    <div class="col-2 col-form-label"> {{field.label_tag}}</div>
+    <div class="col-10">
+     {{field}}
+     {{field.errors}}
+    </div>
+  </div>
+  {% endfor %}
+
+<div>
+  <input type="submit" class=" my-1 text-light btn  btn-info "  value="Submit">
+  </div> 
+  </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "cust/base.html" %}
+
+{% block content %}
+<div class="m-5 overflow-auto">
+  <table class="table  table-info table-striped  ">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NAME</th>
+          <th scope="col">EMAIL</th>
+          <th scope="col">STATUS</th>
+          <th scope="col">AMOUNT</th>
+          <th scope="col">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for field in data  %}
+        <tr>
+          <th scope="row">{{field.id}}</th>
+          <td>{{field.username}}</td>
+          <td>{{field.email}}</td>
+          <td>{{field.groups}}</td>
+          <td>none</td>
+          
+          <td><a href="{% url 'admin_user_edit' field.id  %}" class="btn btn-light px-4"> Edit</a></td>
+        </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+</div>
+{% endblock content %}
