@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 
 
-
+# this function generate random pdf
 def render_to_pdf(template_src,content_dict ={}):
     # getting template 
     template = get_template(template_src)
