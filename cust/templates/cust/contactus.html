@@ -3,19 +3,23 @@
 
 {% block content %}
 
-<div class="m-5 ">
-  <h2 class="mb-5 text-center text-info">Send us mail so we can help you</h2>
-<div class="mb-3">
-    <div  class="form-label"> <label for="exampleFormControlInput1">Email</label> </div>
-    <input type="email" class="contact-form" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
+<form action="" method="POST">
+  {% csrf_token %}
+  <div class="m-5 ">
+    <h2 class="mb-5 text-center text-info">Send us mail so we can help you</h2>
   <div class="mb-3">
-
-    <div  class="form-label">     <label for="exampleFormControlTextarea1" class="form-label">Write your view here</label> </div>
+      <div  class="form-label"> <label for="exampleFormControlInput1">Email</label> </div>
+      <input type="email" class="contact-form" name="email" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
   
-    <textarea class="contact-form" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <div  class="form-label"><label for="exampleFormControlTextarea1" class="form-label">Write your view here</label> </div>
     
+      <textarea class="contact-form" name = 'text' id="exampleFormControlTextarea1" rows="3"></textarea>
+      
+    </div>
+    <input type="submit" class=" my-1 text-light btn  btn-info "   value="Send Mail">
+    <!-- <a href="" class=" my-1 text-light btn  btn-info ">Send Mail</a> -->
   </div>
-  <a href="" class=" my-1 text-light btn  btn-info ">Send Mail</a>
-</div>
+</form>
 {% endblock content %}

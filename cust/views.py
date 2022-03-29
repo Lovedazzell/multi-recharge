@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect , HttpResponse
 from django.contrib.auth import authenticate, login , logout , update_session_auth_hash
 from django.views import View
-from . models import UserFunds , userprofile
-# from cust.generator.generater import render_to_pdf
+from . models import UserFunds
 from . generater import render_to_pdf
 from django.views.decorators.csrf import csrf_exempt
 import razorpay
@@ -29,7 +28,14 @@ class Viewpdf(View):
 # This is coustmer profile page
 def profile(request):
     if request.user.is_authenticated:
-        context = {'active3':'active'}
+        cf = UserFunds.objects.filter(name__username = request.user).values('payment_status')
+        payment_status= False
+        for i in range(len(cf)):
+            for key, val in cf[i].items():
+                if val == True:
+                    payment_status = True
+                    break
+        context = {'active3':'active','payment_status':payment_status}
         return render(request,'cust/profile.html',context)
     else:
         return HttpResponseRedirect('/login/')
@@ -46,7 +52,7 @@ def userlogin(request):
                 user = authenticate(username = uname ,password = upass)
                 if user is not None:
                     login(request, user)
-                    return render(request,'cust/profile.html')
+                    return HttpResponseRedirect('/profile/')
         else:
             form = Loginform()
         context = {'form':form}
@@ -193,6 +199,20 @@ def editprofile(request):
 
 # contact to support function
 def contactus(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        text = request.POST.get('text')
+        send_mail(
+            # subject
+            'testing',
+            # msg
+            'text',
+            # from email
+            settings.EMAIL_HOST_USER,
+            # TO
+            [email]
+
+        )
     return render(request,'cust/contactus.html')
 
 # about us function 
@@ -218,6 +238,20 @@ def handelrequest(request):
         status.payment_status = True
         status.certificate_status = 'Pending'
         status.save()
+        msg_plane = render_to_string('cust/email.txt')
+        msg_html = render_to_string('cust/email.html')
+        send_mail(
+            # subject
+            'texting',
+            # msg
+            msg_plane,
+            # settings
+            settings.EMAIL_HOST_USER,
+            # to
+            [request.user.email],
+            # html template
+            html_message=msg_html
+        )
     return HttpResponse('done')
 
 # shows all fd that user have filled 

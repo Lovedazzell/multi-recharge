@@ -2,10 +2,24 @@
 {% extends "cust/base.html" %}
 {% load static %}
 {% block content %}
-<h1 class="m-4">Save Your Future With Fd Funds</h1>
-<p class="m-4 text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quibusdam eum quos eius. Delectus minus ipsum temporibus voluptatum. Aliquid ducimus impedit tempora et corporis maxime modi fugit amet earum quae!</p>
+<h1 class="m-4 text-center ">Save Your Future With Fd Funds</h1>
+<p class="m-4 text-muted ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quibusdam eum quos eius. Delectus minus ipsum temporibus voluptatum. Aliquid ducimus impedit tempora et corporis maxime modi fugit amet earum quae!</p>
 
+{% if payment_status %}
+{% if 'cust.view_userfunds' in perms %}
+<div class="container text-center my-4">
+  <a class="btn text-center border border-warning " href="{% url  'generate_certificate'  %}" >View Certificate</a>
 
+</div>
+{% else %}
+<div class="container border-bottom border-secondary rounded  text-center p-3">
+  <h2 class="text-warning">Certificate Status Pending</h2>
+  <p class="text-muted">This will update within few hours</p>
+
+</div>
+
+{% endif %}
+{% endif %}
 <div class="bg-light m">
   <img src="{% static 'cust/images/fd1.jpg' %}" class="img-fluid my-4  " alt="...">
 </div>

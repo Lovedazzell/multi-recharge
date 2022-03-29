@@ -44,10 +44,10 @@ class Userchangeform(UserChangeForm):
     last_login = forms.DateTimeField(label_suffix="" ,disabled=True,widget=forms.DateTimeInput(attrs={'class':'edit-form'}))
     class Meta:
         model =User
-        fields = ['username','first_name','last_name','email','date_joined','last_login',]
-        # widgets = {
-        #     'groups':forms.SelectMultiple(attrs={'class':'form-select w-25'})
-        # }
+        fields = ['username','first_name','last_name','email','date_joined','last_login','groups']
+        widgets = {
+            'groups':forms.SelectMultiple(attrs={'class':'form-select w-25'})
+        }
 
 
 # detail change panel for nuser
