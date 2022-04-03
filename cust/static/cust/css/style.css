@@ -87,20 +87,29 @@ overflow: hidden;
 }
 
 /* --------------customer profile------------- */
-.grid-box{
+.grid_r{
 display: grid;
 grid-template-columns: 1fr  ;
-justify-items: center;
+/* justify-items: center; */
+place-items: center;
 row-gap: 10px;
 }
 
-
+.r_box{
+  padding:1rem;
+    height: 120px;
+    /* border:2px solid rgb(228, 228, 228); */
+    background:linear-gradient(to right ,aqua,rgb(238, 238, 238));
+    /* background-color: pink; */
+    width:90%;
+}
+/* 
 .fd-card:hover{
    box-shadow: 2px 2px 10px aqua;
    border: none;
-}
+} */
 
-@media only screen and (min-width:650px){
+/* @media only screen and (min-width:650px){
     .grid-box{
     row-gap: 15px;
         grid-template-columns: 1fr 1fr  ;
@@ -123,8 +132,8 @@ row-gap: 10px;
         grid-column-start: 3;
         grid-column-end: 4;
         
-    }
-}
+    } */
+/* } */
 
 
 /* ----------------admin panel------------ */

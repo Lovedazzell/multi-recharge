@@ -33,13 +33,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'email'
-EMAIL_HOST_PASSWORD = 'pwd'
+EMAIL_HOST_USER = 'lovepreetirth@gmail.com'
+EMAIL_HOST_PASSWORD = 'wlfmlkilznbjofnf'
 
+
+
+
+# GETWAY INTEGRATION
+PAYTM_MERCHANT_ID = 'gje00097273492106352'
+PAYTM_SECRET_KEY = 'IYoFCIZ8ulDeOiNL'
+PAYTM_WEBSITE = 'WEBSTAGING'
+PAYTM_CHANNEL_ID = 'WEB'
+PAYTM_INDUSTRY_TYPE_ID = 'Retail'
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,7 +136,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL  = '/images/'
-MEDIA_ROOT = BASE_DIR / 'cust\static\cust\images'
+MEDIA_ROOT = BASE_DIR / 'cust/static/cust/images'
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 SESSION_FILE_PATH = BASE_DIR/'session'
 # Default primary key field type

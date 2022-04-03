@@ -15,7 +15,7 @@ urlpatterns = [
     path('allusers/',views.allusers,name = 'allusers'),
 
     path('adminedit/<int:pk>/',views.admin_user_edit,name = 'admin_user_edit'),
-    path('applyFd/<int:pk>/',views.applyFd,name = 'applyFd'),
+    path('applyFd/',views.applyFd,name = 'applyFd'),
 
 
     path('editprofile/',views.editprofile,name = 'editprofile'),

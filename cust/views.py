@@ -8,10 +8,10 @@ from django.views import View
 from . models import UserFunds
 from . generater import render_to_pdf
 from django.views.decorators.csrf import csrf_exempt
-import razorpay
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from . import PayTmChecksum
 
 
 # view for show the pdf 
@@ -21,6 +21,7 @@ class Viewpdf(View):
             'hello':'hello',
             'harry':'harry'
         }
+        
         pdf = render_to_pdf('cust/certificate.html',data)
         return HttpResponse(pdf ,content_type = 'application/pdf' )
 
@@ -102,7 +103,7 @@ def userpwdchange(request):
         else:
             form = Passwordform(user=request.user)
         context = {'form':form}
-        return render(request,'cust/Password.html',context)
+        return render(request,'cust/password.html',context)
     else:
         return HttpResponseRedirect('/login/')
 
@@ -153,22 +154,36 @@ def admin_user_edit(request,pk):
 
         
 # fd apply form page
-def applyFd(request,pk):
+def applyFd(request):
     if request.method == 'POST':
         form = UserFdDataForm(request.POST)
         if form.is_valid():
             uname = form.cleaned_data['fd_owner']
             uadd = form.cleaned_data['address']
             uemail = form.cleaned_data['email']
-            uamount = form.cleaned_data['amount']
-            uamo = int(form.cleaned_data['amount'] * 100)
+            uamount = form.cleaned_data['amount'] 
             umob = form.cleaned_data['mobile']
-            client =razorpay.Client(auth=('rzp_test_Vq2wtgCcPJuQaB','S78FPRPrEB8KPHQkHYWqMlEz'))
-            payment = client.order.create({'amount':uamo,'currency':'INR','payment_capture':'1'})
-            order = UserFunds(name = request.user,fd_owner=uname ,address=uadd ,email = uemail,amount = uamount,mobile=umob,order_id=payment['id'])
+
+            params = (
+            ('MID', settings.PAYTM_MERCHANT_ID),
+            ('ORDER_ID', "ORDER_9890"),
+            ('CUST_ID', request.user.username),
+            ('TXN_AMOUNT', str(uamount)),
+            ('CHANNEL_ID', settings.PAYTM_CHANNEL_ID),
+            ('WEBSITE', settings.PAYTM_WEBSITE),
+            ('INDUSTRY_TYPE_ID', settings.PAYTM_INDUSTRY_TYPE_ID),
+            ('CALLBACK_URL', 'http://127.0.0.1:8000/handelrequest/'),
+                    )
+            paytmParams = dict(params)
+
+            paytmChecksum = PayTmChecksum.generateSignature(paytmParams,settings.PAYTM_SECRET_KEY)
+            print("generateSignature Returns:" + str(paytmChecksum))
+            paytmParams['CHECKSUMHASH'] = paytmChecksum
+
+            order = UserFunds(name = request.user,fd_owner=uname ,address=uadd ,email = uemail,amount = uamount,mobile=umob)
             order.save()
-            context = {'form':form,'payment':payment,'name':uname,'address':uadd,'mobile':umob,'email':uemail}
-            return render(request,'cust/applyfd.html',context) 
+            context = {'paytmParams':paytmParams}
+            return render(request,'cust/PayTm.html',context) 
     else:
         form = UserFdDataForm()
     context = {'form':form}
@@ -228,31 +243,9 @@ def allforms(request):
 @csrf_exempt
 def handelrequest(request):
     if request.method == 'POST':
-        data = request.POST
-        order_id = ""
-        for key, value in data.items():
-            if key == 'razorpay_order_id':
-                order_id = value
-                break
-        status = UserFunds.objects.filter(order_id=order_id).first()
-        status.payment_status = True
-        status.certificate_status = 'Pending'
-        status.save()
-        msg_plane = render_to_string('cust/email.txt')
-        msg_html = render_to_string('cust/email.html')
-        send_mail(
-            # subject
-            'texting',
-            # msg
-            msg_plane,
-            # settings
-            settings.EMAIL_HOST_USER,
-            # to
-            [request.user.email],
-            # html template
-            html_message=msg_html
-        )
-    return HttpResponse('done')
+        a = request.POST
+        print(a)
+        return HttpResponse('done')
 
 # shows all fd that user have filled 
 def userfdform(request):

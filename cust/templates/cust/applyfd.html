@@ -3,48 +3,6 @@
 {% block content %}
 
 
-{% if payment %}
-
-
-<div class="alert alert-info  text-center m-3" role="alert">
-  <button class="btn btn-info"  type="submit" id="rzp-button1">Proceed to pay</button>
-</div>
-
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-var options = {
-    "key": "rzp_test_Vq2wtgCcPJuQaB", // Enter the Key ID generated from the Dashboard
-    "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "http://127.0.0.1:8000/handelrequest/",
-    "prefill": {
-        "name": "{{name}}",
-        "email": "{{email}}",
-        "contact": "{{mobile}}"
-    },
-    "notes": {
-        "address": "{{address}}"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-
-// document.getElementById('rzp-button1').submit();
-document.getElementById('rzp-button1').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-</script>
-
-{% endif %}
-
 
 <div class="container-sm ">
     <img src="{% static 'cust/images/fd1.jpg' %}" class="img-fluid my-4  " alt="...">
